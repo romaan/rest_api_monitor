@@ -22,3 +22,4 @@ def debug_task(self):
 def rest(*args, **kwargs):
     response = requests.get("https://www.dollarmates.com")
     print(response.status_code)
+    print(response.elapsed.total_seconds())

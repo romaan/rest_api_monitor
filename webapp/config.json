@@ -2,7 +2,7 @@
   "posts": {
     "url": "https://jsonplaceholder.typicode.com/posts",
     "method": "get",
-    "frequency": "1 minute",
+    "frequency": "1 minutes",
     "retention": "7 days",
     "expected": {
       "status_code": 200
