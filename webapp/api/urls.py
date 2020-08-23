@@ -1,6 +1,7 @@
 from django.conf.urls import url
-from .views import TaskApi
+from .views import ConfigApi, HealthApi
 
 urlpatterns = [
-    url('tasks', TaskApi.as_view())
+    url('config', ConfigApi.as_view()),
+    url('health/(?P<title>.*)', HealthApi.as_view(), name='get-health-record')
 ]

@@ -1,3 +1,8 @@
-from django.test import TestCase
+from django.urls import reverse
+from rest_framework.test import APITestCase
 
-# Create your tests here.
+
+class HealthApiTest(APITestCase):
+
+    def test_get_health_record(self):
+        self.client.get(reverse('get-health-record'))

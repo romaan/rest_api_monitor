@@ -14,3 +14,9 @@
 docker run --name some-redis -p 6379:6379 -d redis
 celery -A tasks beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
 ```
+
+## TODO
+
+- User interface
+- Socket push events
+- Unit tests

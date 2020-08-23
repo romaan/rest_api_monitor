@@ -1,15 +1,31 @@
-from rest_framework.generics import ListCreateAPIView
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework import status
-from .serializer import TaskSerializer
+from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
+
+from api.models import HealthCheckRecord
+from api.serializer import HealthCheckRecordSerializer
+import json
 
 
-class TaskApi(ListCreateAPIView):
-
-    serializer_class = TaskSerializer
+class ConfigApi(APIView):
 
     def get(self, request, *args, **kwargs):
-        return Response({"status": "ok"})
+        with open('config.json', 'r') as f:
+            json_data = json.load(f)
+        return Response(data=json_data, status=status.HTTP_200_OK)
 
-    def create(self, request, *args, **kwargs):
-        return Response(status=status.HTTP_201_CREATED)
+
+class HealthApi(ListAPIView):
+
+    serializer_class = HealthCheckRecordSerializer
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['=url']
+    ordering_fields = ['timestamp']
+    default_limit = 10
+
+    def get_queryset(self):
+        return HealthCheckRecord.objects.filter(title=self.kwargs['title'])
+
+

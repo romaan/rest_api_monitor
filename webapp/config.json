@@ -1,11 +1,29 @@
 {
-  "posts": {
-    "url": "https://jsonplaceholder.typicode.com/posts",
-    "method": "get",
-    "frequency": "1 minutes",
-    "retention": "7 days",
-    "expected": {
-      "status_code": 200
+  "config": {
+    "retention": "30 minutes",
+    "total_consecutive_failures_2_alert": 3,
+    "destination_email": "romaank@gmail.com"
+  },
+  "monitor": {
+    "posts": {
+      "request": {
+        "url": "https://jsonplaceholder.typicode.com/posts",
+        "method": "get"
+      },
+      "frequency": "11 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "romaan": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
     }
   }
 }
