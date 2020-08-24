@@ -1,6 +1,5 @@
 from celery import Celery
 from django.conf import settings
-from collections import namedtuple
 import os
 import requests
 
@@ -44,3 +43,5 @@ def rest(*args, **kwargs):
         HealthCheckRecord.objects.create(title=kwargs['title'], url=request['url'], timestamp=timestamp,
                                          response_status=0,
                                          response_time=0)
+
+
