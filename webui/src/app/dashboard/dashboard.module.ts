@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
 import {RouterModule, Routes} from '@angular/router';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {MaterialSharedModule} from '@app/shared/material-shared.module';
+import {SharedModule} from '../shared/shared.module';
+import {DashboardService} from './dashboard.service';
 
 
 const routes: Routes = [
@@ -14,12 +15,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [DashboardComponent],
+  declarations: [
+    DashboardComponent
+  ],
   imports: [
     CommonModule,
-    MaterialSharedModule,
+    SharedModule,
     NgxChartsModule,
     RouterModule.forChild(routes)
+  ],
+  providers: [
+    DashboardService
   ]
 })
 export class DashboardModule { }

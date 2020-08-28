@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {DashboardService} from "@app/dashboard/dashboard.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -69,7 +70,7 @@ export class DashboardComponent implements OnInit {
   // line, area
   autoScale = true;
 
-  constructor() {
+  constructor(dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
