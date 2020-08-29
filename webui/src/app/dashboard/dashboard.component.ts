@@ -1,67 +1,25 @@
-import {Component, OnInit} from '@angular/core';
-import {DashboardService} from "@app/dashboard/dashboard.service";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {DashboardService} from '@app/dashboard/dashboard.service';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
-  tiles = [
-    {text: 'One', cols: 1, rows: 1, color: '#142A5C'},
-    {text: 'Two', cols: 1, rows: 1, color: '#B7A0E8'},
-    {text: 'Three', cols: 1, rows: 1, color: '#FF0000'},
-    {text: 'One', cols: 1, rows: 1, color: '#142A5C'},
-    {text: 'Two', cols: 1, rows: 1, color: '#B7A0E8'},
-    {text: 'Three', cols: 1, rows: 1, color: '#FF0000'},
-    {text: 'One', cols: 1, rows: 1, color: '#142A5C'},
-    {text: 'Two', cols: 1, rows: 1, color: '#B7A0E8'},
-    {text: 'Three', cols: 1, rows: 1, color: '#FF0000'},
-  ];
-
-  public multi = [
-    {
-      "name": "Germany",
-      "series": [
-        {
-          "name": "2010",
-          "value": 730
-        },
-        {
-          "name": "2011",
-          "value": 894
-        },
-        {
-          "name": "2012",
-          "value": 730
-        },
-        {
-          "name": "2013",
-          "value": 100
-        },
-        {
-          "name": "2014",
-          "value": 1000
-        },
-        {
-          "name": "2015",
-          "value": 5
-        }
-      ]
-    }
-  ];
+  tiles: Array<string>;
+  data: object = {};
 
   // options for the chart
-  showXAxis = true;
-  showYAxis = true;
   gradient = false;
-  showLegend = false;
+
   showXAxisLabel = false;
   xAxisLabel = 'Number';
   showYAxisLabel = false;
   yAxisLabel = 'Value';
-  timeline = true;
 
   colorScheme = {
     domain: ['#5AA454']
@@ -70,10 +28,31 @@ export class DashboardComponent implements OnInit {
   // line, area
   autoScale = true;
 
-  constructor(dashboardService: DashboardService) {
+  constructor(private dashboardService: DashboardService) {
   }
 
   ngOnInit(): void {
+    this.dashboardService.getConfig().subscribe((config) => {
+      for (const key in config.monitor) {
+        this.data[key] = [{name: key, status: 'Waiting...', series: []}];
+      }
+      this.tiles = Object.keys(config.monitor);
+    });
+
+    this.dashboardService.$wsSubject.subscribe((data) => {
+      const label = moment(data.text.timestamp).local().format('HH:mm:ss a');
+      this.data[data.text.title][0].status = data.status;
+      this.data[data.text.title][0].series.push({name: label, value: data.text.response_time});
+      const length = this.data[data.text.title][0].series.length;
+      if (length > 10) {
+        this.data[data.text.title][0].series.shift();
+      }
+      this.data[data.text.title] = [...this.data[data.text.title]];
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.dashboardService.$wsSubject.unsubscribe();
   }
 
 }

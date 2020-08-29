@@ -24,6 +24,86 @@
       "expected_response": {
         "status_code": 200
       }
+    },
+    "khadeer": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "ahmed": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "go": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "test": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "hello": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "trying": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "13 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "romaan-2": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "5 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
+    },
+    "romaan-3": {
+      "request": {
+        "url": "https://romaan.com.au",
+        "method": "get"
+      },
+      "frequency": "7 seconds",
+      "expected_response": {
+        "status_code": 200
+      }
     }
   }
 }

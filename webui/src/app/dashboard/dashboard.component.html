@@ -1,36 +1,35 @@
-<mat-toolbar>
+<mat-toolbar style="background: black; color: white">
   Sharp Eye
 </mat-toolbar>
-<div class="basic-container" style="background: bisque">
-  <mat-grid-list cols="3" rowHeight="fit" gutterSize="10px" style="height: calc(100vh - 14px)">
-    <mat-grid-tile
-      *ngFor="let tile of tiles"
-      [colspan]="tile.cols"
-      [rowspan]="tile.rows"
-      [style.background]="tile.color">
-      <mat-card class="example-card" style="height: 100%; width: 100%">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content style="height: 100%; width: 100%">
-              <ngx-charts-line-chart
-                [scheme]="colorScheme"
-                [results]="multi"
-                [gradient]="gradient"
-                [xAxis]="showXAxis"
-                [yAxis]="showYAxis"
-                [legend]="showLegend"
-                [showXAxisLabel]="showXAxisLabel"
-                [showYAxisLabel]="showYAxisLabel"
-                [xAxisLabel]="xAxisLabel"
-                [yAxisLabel]="yAxisLabel"
-                [autoScale]="autoScale"
-                [timeline]="timeline">
-              </ngx-charts-line-chart>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div>
+<div class="basic-container" style="background: darkgray; padding: 10px">
+    <mat-grid-list cols="3" rowHeight="fit" gutterSize="10px" style="height: calc(100vh - 26px)">
+      <mat-grid-tile
+        *ngFor="let tile of tiles"
+        colspan="1"
+        rowspan="1">
+        <mat-card class="example-card" style="height: 100%; width: 100%">
+          <mat-card-header style="background: lightgreen">
+            <mat-card-title>{{tile}}</mat-card-title>
+            <mat-card-subtitle>{{this.data[tile][0].status}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content style="height: 100%; width: 100%">
+            <ngx-charts-line-chart
+              [scheme]="colorScheme"
+              [results]="this.data[tile]"
+              [gradient]="gradient"
+              [xAxis]="true"
+              [yAxis]="true"
+              [legend]="true"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel"
+              [yAxisLabel]="yAxisLabel"
+              [autoScale]="autoScale"
+              timeline="true">
+            </ngx-charts-line-chart>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+

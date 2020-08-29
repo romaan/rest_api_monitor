@@ -1,4 +1,4 @@
 .idea/
 __pycache__/
 webapp/db.sqlite3
-
+webui/node_modules/

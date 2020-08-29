@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -13,7 +13,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     MatToolbarModule,
