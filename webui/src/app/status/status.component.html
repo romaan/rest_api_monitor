@@ -1,0 +1,23 @@
+<div style="height: 100vh; background: grey">
+  <mat-toolbar style="background: black; color: white">
+    Sharp Eye
+    <mat-icon class="material-icons" routerLink='/'>dashboard</mat-icon>
+    <mat-icon class="material-icons" routerLink='/status'>assignment_late</mat-icon>
+  </mat-toolbar>
+  <div style="padding: 10px">
+    <mat-grid-list cols="4" rowHeight="100px" gutterSize="10px">
+      <mat-grid-tile
+        *ngFor="let d of data"
+        [colspan]="1"
+        [rowspan]="1">
+        <mat-card class="example-card" [style.background]="d.color" style="display: block; height: 100%; width: 100%;">
+          <mat-card-header style="padding-top: 10%;">
+            <mat-card-title>{{d.text}}</mat-card-title>
+            <mat-card-subtitle *ngIf="d.lastUpdate">Updated: {{d.lastUpdate}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>
+

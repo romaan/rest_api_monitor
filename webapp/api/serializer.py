@@ -44,7 +44,7 @@ class PostSaveHealthRecord(object):
             error_count += 1
             cache.set(instance.title, error_count)
         elif instance.response_status == config['monitor'][instance.title]['expected_response']['status_code']:
-            cache.set(instance.title, error_count)
+            cache.set(instance.title, 0)
         return error_count
 
     def push_event(self, instance, trigger_result):

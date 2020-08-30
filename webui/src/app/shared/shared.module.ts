@@ -4,6 +4,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
+import {MatIconModule} from '@angular/material/icon';
+import {MonitorService} from './monitor.service';
 
 
 @NgModule({
@@ -13,14 +15,17 @@ import {HttpClientModule} from '@angular/common/http';
     MatToolbarModule,
     MatGridListModule,
     MatCardModule,
+    MatIconModule,
     HttpClientModule,
   ],
   exports: [
     MatToolbarModule,
     MatGridListModule,
-    MatCardModule
+    MatCardModule,
+    MatIconModule
   ],
   providers: [
+    MonitorService
   ]
 })
 export class SharedModule { }

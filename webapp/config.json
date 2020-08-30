@@ -5,99 +5,99 @@
     "destination_email": "romaank@gmail.com"
   },
   "monitor": {
-    "posts": {
+    "service-1": {
       "request": {
-        "url": "https://jsonplaceholder.typicode.com/posts",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "11 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "romaan": {
+    "service-2": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "khadeer": {
+    "service-3": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "ahmed": {
+    "service-4": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "go": {
+    "service-5": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "test": {
+    "service-6": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "hello": {
+    "service-7": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "trying": {
+    "service-8": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "13 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "romaan-2": {
+    "service-9": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
-      "frequency": "5 seconds",
+      "frequency": "7 seconds",
       "expected_response": {
         "status_code": 200
       }
     },
-    "romaan-3": {
+    "service-10": {
       "request": {
-        "url": "https://romaan.com.au",
+        "url": "https://jsonplaceholder.typicode.com/posts/",
         "method": "get"
       },
       "frequency": "7 seconds",

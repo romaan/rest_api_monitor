@@ -2,3 +2,5 @@
 __pycache__/
 webapp/db.sqlite3
 webui/node_modules/
+webapp/static/
+webapp/celerybeat.pid

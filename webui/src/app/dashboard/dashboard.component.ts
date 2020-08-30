@@ -1,5 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {DashboardService} from '@app/dashboard/dashboard.service';
+import {AfterViewInit, Component, OnDestroy} from '@angular/core';
+import {MonitorService} from '@app/shared/monitor.service';
 
 import * as moment from 'moment';
 
@@ -8,10 +8,10 @@ import * as moment from 'moment';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements AfterViewInit, OnDestroy {
 
-  tiles: Array<string>;
-  data: object = {};
+  indexMap = {};
+  data = [];
 
   // options for the chart
   gradient = false;
@@ -22,37 +22,51 @@ export class DashboardComponent implements OnInit, OnDestroy {
   yAxisLabel = 'Value';
 
   colorScheme = {
-    domain: ['#5AA454']
+    domain: []
   };
 
   // line, area
   autoScale = true;
 
-  constructor(private dashboardService: DashboardService) {
+  constructor(private monitorService: MonitorService) {
   }
 
-  ngOnInit(): void {
-    this.dashboardService.getConfig().subscribe((config) => {
+  ngAfterViewInit(): void {
+    let that = this;
+    this.monitorService.getConfig().subscribe((config) => {
       for (const key in config.monitor) {
-        this.data[key] = [{name: key, status: 'Waiting...', series: []}];
+        this.indexMap[key] = this.data.length;
+        this.data.push({name: key, series: []});
+        this.colorScheme.domain.push(that.getRandomColor());
       }
-      this.tiles = Object.keys(config.monitor);
     });
 
-    this.dashboardService.$wsSubject.subscribe((data) => {
+    this.monitorService.$wsSubject.subscribe((data) => {
       const label = moment(data.text.timestamp).local().format('HH:mm:ss a');
-      this.data[data.text.title][0].status = data.status;
-      this.data[data.text.title][0].series.push({name: label, value: data.text.response_time});
-      const length = this.data[data.text.title][0].series.length;
-      if (length > 10) {
-        this.data[data.text.title][0].series.shift();
+      const index = this.indexMap[data.text.title];
+      this.data[index].status = data.status;
+
+      this.data[index].series.push({name: label, value: data.text.response_time});
+      const length = this.data[index].series.length;
+      if (length > 100) {
+        this.data[index].series.shift();
       }
-      this.data[data.text.title] = [...this.data[data.text.title]];
+      this.data = [...this.data];
     });
   }
 
   ngOnDestroy(): void {
-    this.dashboardService.$wsSubject.unsubscribe();
+    this.monitorService.$wsSubject.unsubscribe();
   }
 
+  getRandomColor(): any {
+    let letters = '0123456789'.split('');
+    let color = '#';
+    color += letters[Math.round(Math.random() * 9)];
+    letters = '0123456789ABCDEF'.split('');
+    for (var i = 0; i < 5; i++) {
+      color += letters[Math.round(Math.random() * 15)];
+    }
+    return color;
+  }
 }

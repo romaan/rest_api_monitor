@@ -1,35 +1,24 @@
-<mat-toolbar style="background: black; color: white">
-  Sharp Eye
-</mat-toolbar>
-<div class="basic-container" style="background: darkgray; padding: 10px">
-    <mat-grid-list cols="3" rowHeight="fit" gutterSize="10px" style="height: calc(100vh - 26px)">
-      <mat-grid-tile
-        *ngFor="let tile of tiles"
-        colspan="1"
-        rowspan="1">
-        <mat-card class="example-card" style="height: 100%; width: 100%">
-          <mat-card-header style="background: lightgreen">
-            <mat-card-title>{{tile}}</mat-card-title>
-            <mat-card-subtitle>{{this.data[tile][0].status}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content style="height: 100%; width: 100%">
-            <ngx-charts-line-chart
-              [scheme]="colorScheme"
-              [results]="this.data[tile]"
-              [gradient]="gradient"
-              [xAxis]="true"
-              [yAxis]="true"
-              [legend]="true"
-              [showXAxisLabel]="showXAxisLabel"
-              [showYAxisLabel]="showYAxisLabel"
-              [xAxisLabel]="xAxisLabel"
-              [yAxisLabel]="yAxisLabel"
-              [autoScale]="autoScale"
-              timeline="true">
-            </ngx-charts-line-chart>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+<div style="height: calc(100vh - 26px)">
+  <mat-toolbar style="background: black; color: white">
+    Sharp Eye
+    <mat-icon class="material-icons" routerLink='/'>dashboard</mat-icon>
+    <mat-icon class="material-icons" routerLink='/status'>assignment_late</mat-icon>
+  </mat-toolbar>
+  <div style="background: white; padding: 10px; height: 90%" *ngIf="this.data">
+    <ngx-charts-line-chart
+      [scheme]="colorScheme"
+      [results]="this.data"
+      [gradient]="gradient"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [autoScale]="autoScale"
+      [timeline]="false">
+    </ngx-charts-line-chart>
   </div>
+</div>
 
