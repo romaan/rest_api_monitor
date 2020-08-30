@@ -23,11 +23,11 @@ export class MonitorService {
     this.$wsSubject = webSocket(`ws://${this.httpUrl}/health-record`);
   }
 
-  public getConfig(): Observable<any> {
-    return this.http.get(`http://${this.httpUrl}/api/config`);
+  public getConfig(): Promise<any> {
+    return this.http.get(`http://${this.httpUrl}/api/config`).toPromise();
   }
 
-  public getData(service: string): Observable<any> {
-    return this.http.get(`http://${this.httpUrl}/api/health/${service}?ordering=timestamp`);
+  public getData(service: string): Promise<any> {
+    return this.http.get(`http://${this.httpUrl}/api/health/${service}?ordering=timestamp`).toPromise();
   }
 }

@@ -4,18 +4,18 @@
     <mat-icon class="material-icons" routerLink='/'>dashboard</mat-icon>
     <mat-icon class="material-icons" routerLink='/status'>assignment_late</mat-icon>
   </mat-toolbar>
-  <div style="background: white; padding: 10px; height: 90%" *ngIf="this.data">
+  <div style="background: white; padding: 10px; height: 90%" *ngIf="this.show">
     <ngx-charts-line-chart
       [scheme]="colorScheme"
       [results]="this.data"
-      [gradient]="gradient"
+      [gradient]="false"
       [xAxis]="true"
       [yAxis]="true"
       [legend]="true"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
+      [showXAxisLabel]="false"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Time'"
+      [yAxisLabel]="'Response in milli seconds'"
       [autoScale]="autoScale"
       [timeline]="false">
     </ngx-charts-line-chart>
