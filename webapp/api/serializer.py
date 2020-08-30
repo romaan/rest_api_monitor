@@ -2,9 +2,11 @@ import json
 import logging
 
 from asgiref.sync import async_to_sync
+from django.conf import settings
 from django.core.cache import cache
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
 from rest_framework import serializers
 from .models import HealthCheckRecord
 
@@ -33,6 +35,7 @@ class PostSaveHealthRecord(object):
             try:
                 json_data = json.load(f)
                 cache.set('config', json_data)
+                return cache.get('config')
             except Exception as e:
                 logging.critical("Unable to load config.json data")
                 logging.critical(e)
@@ -50,9 +53,27 @@ class PostSaveHealthRecord(object):
     def push_event(self, instance, trigger_result):
         from channels.layers import get_channel_layer
         channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)('broadcast', {"type": "receive", "text": HealthCheckRecordSerializer(instance=instance).data, "status": self.get_status(trigger_result)})
+        status = self.get_status(trigger_result, instance)
+        async_to_sync(channel_layer.group_send)('broadcast',
+                                                {
+                                                    "type": "receive",
+                                                    "text": HealthCheckRecordSerializer(instance=instance).data,
+                                                    "status": status
+                                                })
 
-    def get_status(self, trigger_result):
+    def get_status(self, trigger_result, instance):
         if trigger_result >= self.get_cache()['config']['total_consecutive_failures_2_alert']:
+            if trigger_result == self.get_cache()['config']['total_consecutive_failures_2_alert']:
+                self.send_email(instance)
             return 'Down'
         return 'Up'
+
+    def send_email(self, service):
+        config = self.get_cache()
+        send_mail(
+            'REST Monitor : ' + service.title + ' is down',
+            'Service {} is down'.format(service.title),
+            settings.EMAIL_HOST_USER,
+            [config['config']['destination_email']],
+            fail_silently=False,
+        )
