@@ -16,7 +16,7 @@ export class MonitorService {
 
   constructor(private http: HttpClient) {
     if (environment.production) {
-      this.httpUrl = `${window.location.host}:${window.location.port}`;
+      this.httpUrl = `${window.location.host}`;
     } else {
       this.httpUrl = environment.url;
     }
